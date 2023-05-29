@@ -48,8 +48,6 @@ export default {
     }
   },
   methods: {
- // dispatches the addToCart action with the book as the payload
-
     async addToCart() {
       await this.$store.dispatch('addToCart', this.book);
     }
