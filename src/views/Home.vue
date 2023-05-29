@@ -11,7 +11,7 @@
         <a href="#" @click.prevent="logout" class="text-red-600">Logout</a>
       </div>
       <hr class="my-6 ">
-    <BookCreate/>
+      <BookCreate/>
     </div>
   </div>
 </template>

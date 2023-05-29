@@ -5,6 +5,7 @@ import Login from "../views/Login";
 import Register from "@/views/Register";
 import Welcome from "@/views/Welcome.vue";
 import BookDetails from "@/views/BookDetails.vue";
+import EditBook from "@/views/EditBook.vue";
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,14 @@ const routes = [
         meta: {
             requiresAuth: false
         }
+    },
+    {
+        path: '/books/edit/:id',
+        name: 'BookEdit',
+        component: EditBook,
+        meta: {
+            requiresAuth: true,
+        }
     }
 ]
 
@@ -67,12 +76,7 @@ router.beforeEach((to, from, next) => {
         }, 1)
 
     } else {
-        setTimeout(() => {
-            if (router.app.$store.getters.isAuth)
-                next("/");
-            else
-                next()
-        }, 1)
+        next();
     }
 })
 export default router

@@ -1,7 +1,10 @@
 <template>
   <div class="flex justify-center py-6 px-3">
     <div class="w-full">
-      <h1 class="text-xl text-gray-600">Create Book</h1>
+      <div class="flex justify-between">
+        <h1 class="text-xl text-gray-600">Create Book</h1>
+        <router-link to="/" class="text-blue-500 hover:text-blue-800">All Books</router-link>
+      </div>
       <hr class="my-6">
 
       <form @submit.prevent="submitForm">
