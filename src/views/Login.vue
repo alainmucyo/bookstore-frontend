@@ -64,8 +64,9 @@ export default {
           config.headers.Authorization = `Bearer ${token}`;
           return config;
         });
-        this.$router.push("/")
+       await this.$router.push("/home")
       } catch (e) {
+        console.log(e)
         this.failed = true;
         if (e.response.status === 400) {
           this.errorMsg = "Wrong email or password."

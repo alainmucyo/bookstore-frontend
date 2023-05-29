@@ -11,20 +11,26 @@
           </p>
         </div>
         <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{
-            book.author.first_name
-          }} {{ book.author.last_name }}</span>
+          <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#{{
+              book.author.first_name
+            }} {{ book.author.last_name }}</span>
         </div>
-        <div class="px-6 pt-4 pb-2 flex justify-between">
-        <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">${{
-            Number(book.price).toLocaleString()
-          }}</span>
+        <div class="px-6 pt-4 pb-2">
+          <span class="inline-block bg-green-200 rounded-full px-3 py-1 text-sm font-semibold text-green-700 mr-2 mb-2">${{
+              Number(book.price).toLocaleString()
+            }}</span>
           <span class="inline-block bg-blue-200 rounded-full px-3 py-1 text-sm font-semibold text-blue-700 mr-2 mb-2">{{
               new Date(book.published).toLocaleDateString()
             }}</span>
+        </div>
+        <div class="px-6 pt-4 pb-2">
           <button
-              class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="w-full inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mb-2"
               @click="addToCart">Add to Cart
+          </button>
+          <button v-if="$store.getters.isAuth"
+              class="w-full inline-block bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              @click="editBook">Edit
           </button>
         </div>
       </div>
@@ -39,6 +45,7 @@
 <script>
 import axios from "axios";
 import HeaderNav from "@/components/HeaderNav.vue";
+
 export default {
   name: 'BookDetails',
   components: {HeaderNav},
@@ -50,7 +57,10 @@ export default {
   methods: {
     async addToCart() {
       await this.$store.dispatch('addToCart', this.book);
-    }
+    },
+    editBook() {
+      this.$router.push(`/books/edit/${this.book.id}`);
+    },
   },
   async created() {
     try {
